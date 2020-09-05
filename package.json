@@ -1,0 +1,57 @@
+{
+  "name": "@kafelix496/js-library-template",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Javascript library template",
+  "main": "index.js",
+  "devDependencies": {
+    "@babel/core": "^7.11.5",
+    "@babel/preset-env": "^7.11.5",
+    "@rollup/plugin-babel": "^5.2.0",
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "babel-jest": "^26.3.0",
+    "eslint": "^7.8.1",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jest": "^23.20.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.6",
+    "husky": "^4.2.5",
+    "jest": "^26.4.2",
+    "lint-staged": "^10.2.13",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.26.9",
+    "rollup-plugin-copy": "^3.3.0",
+    "rollup-plugin-terser": "^7.0.1"
+  },
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint '**/*.js'",
+    "lint:fix": "eslint --fix '**/*.js'",
+    "prebuild": "rimraf npm/cjs npm/umd",
+    "build": "rollup -c"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": "npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kafelix496/js-library-template.git"
+  },
+  "keywords": [
+    "react",
+    "library",
+    "template"
+  ],
+  "author": "Felix J Lee",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kafelix496/js-library-template/issues"
+  },
+  "homepage": "https://github.com/kafelix496/js-library-template#readme"
+}
