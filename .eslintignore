@@ -1,9 +1,7 @@
 node_modules
 
-build
+/scripts
 
-es
-cjs
-dist
-
-scripts
+/es
+/cjs
+/dist
