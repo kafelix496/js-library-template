@@ -9,9 +9,10 @@ PUBLISH_FILE_NAME : name you want to put when publish
 PUBLISH_NAME_FOR_UMD_FORMAT : Name for UMD export
 
 ./package.json : 'name', 'description', 'author' 'keywords' property
+./package.json : 'unpkg' property -> 'customLibrary' -> PUBLISH_FILE_NAME
 ./scripts/publishIndex : 'customLibrary' -> PUBLISH_FILE_NAME
-./package.json : 'customLibrary' -> PUBLISH_FILE_NAME
-./package.json : 'CL' -> Name for UMD export
+./rollup.config.js : 'customLibrary' -> PUBLISH_FILE_NAME
+./rollup.config.js : 'CL' -> Name for UMD export
 ```
 
 ## Lint
