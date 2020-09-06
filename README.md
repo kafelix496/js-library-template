@@ -5,7 +5,7 @@ Javascript library template
 > recommend: when you change variables, search name and change everything
 
 ```
-PUBLISH_FILE_NAME : name want to put when publish
+PUBLISH_FILE_NAME : name you want to put when publish
 PUBLISH_NAME_FOR_UMD_FORMAT : Name for UMD export
 
 ./package.json : 'name', 'description', 'author' 'keywords' property
