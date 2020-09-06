@@ -14,5 +14,21 @@ PUBLISH_NAME_FOR_UMD_FORMAT : Name for UMD export
 ./package.json : 'CL' -> Name for UMD export
 ```
 
+## Lint
+```
+npm run lint
+```
+
+## Test
+```
+npm run test
+```
+
+## Build
+
+```
+npm run build
+```
+
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
