@@ -40,13 +40,7 @@
     "lint": "eslint '**/*.js'",
     "lint:fix": "eslint --fix '**/*.js'",
     "prebuild": "rimraf es cjs dist",
-    "build:es": "rollup --config --format='es' --file='es/customLibrary.js' --environment 'BUILD:development'",
-    "build:es:min": "rollup --config --format='es' --file='es/customLibrary.min.js' --environment 'BUILD:production'",
-    "build:cjs": "rollup --config --format='cjs' --file='cjs/customLibrary.js' --environment 'BUILD:development'",
-    "build:cjs:min": "rollup --config --format='cjs' --file='cjs/customLibrary.min.js' --environment 'BUILD:production'",
-    "build:umd": "rollup --config --format='umd' --file='dist/customLibrary.js' --environment 'BUILD:development' --name='CL'",
-    "build:umd:min": "rollup --config --format='umd' --file='dist/customLibrary.min.js' --environment 'BUILD:production' --name='CL'",
-    "build": "npm run build:es && npm run build:es:min && npm run build:cjs && npm run build:cjs:min && node ./scripts/copyIndexFile.js && npm run build:umd && npm run build:umd:min"
+    "build": "rollup --config && node ./scripts/copyIndexFile.js"
   },
   "husky": {
     "hooks": {
