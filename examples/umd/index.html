@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>UMD Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <script src="./node_modules/@kafelix496/js-library-template/dist/customLibrary.min.js"></script>
+    <script>
+      const { add, multiply } = CL
+
+      document.body.append('add(1, 3) : ' + add(1,3))
+      document.body.append(' ========== ')
+      document.body.append('multiply(2, 3) : ' + multiply(2, 3))
+    </script>
+  </body>
+</html>
