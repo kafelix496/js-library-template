@@ -30,7 +30,7 @@ npm run test
 npm run build
 ```
 
-## examples
+## Examples
 ```
 es : npm start 
 cjs : node index.js
