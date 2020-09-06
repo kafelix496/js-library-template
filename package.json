@@ -1,7 +1,6 @@
 {
   "name": "@kafelix496/js-library-template",
   "version": "1.0.0",
-  "private": true,
   "description": "Javascript library template",
   "main": "./cjs/index.js",
   "exports": {
@@ -16,6 +15,7 @@
   },
   "module": "./es/index.js",
   "unpkg": "dist/customLibrary.min.js",
+  "sideEffects": false,
   "devDependencies": {
     "@babel/core": "^7.11.5",
     "@babel/preset-env": "^7.11.5",
