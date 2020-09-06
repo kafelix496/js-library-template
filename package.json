@@ -28,8 +28,12 @@
     "test": "jest",
     "lint": "eslint '**/*.js'",
     "lint:fix": "eslint --fix '**/*.js'",
-    "prebuild": "rimraf npm/cjs npm/umd",
-    "build": "rollup -c"
+    "prebuild": "rimraf es cjs dist",
+    "build:es": "rollup --config --format='es' --file='es/'",
+    "build:cjs": "rollup --config --format='cjs' --file='cjs/'",
+    "build:umd": "rollup --config --format='umd' --file='dist/customLibrary.js' --name='customLibrary'",
+    "build:umd:min": "rollup --config --format='umd' --file='dist/customLibrary.min.js' --name='customLibrary'",
+    "build": "npm run build:es && npm run build:cjs && npm run build:umd && npm run build:umd:min"
   },
   "husky": {
     "hooks": {
@@ -53,5 +57,6 @@
   "bugs": {
     "url": "https://github.com/kafelix496/js-library-template/issues"
   },
-  "homepage": "https://github.com/kafelix496/js-library-template#readme"
+  "homepage": "https://github.com/kafelix496/js-library-template#readme",
+  "dependencies": {}
 }
