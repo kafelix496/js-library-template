@@ -19,7 +19,7 @@ PUBLISH_NAME_FOR_UMD_FORMAT : Name for UMD export
 npm run lint
 ```
 
-## Test
+## Unit Test
 ```
 npm run test
 ```
@@ -28,6 +28,13 @@ npm run test
 
 ```
 npm run build
+```
+
+## examples
+```
+es : npm start 
+cjs : node index.js
+umd : npx serve
 ```
 
 ## License
