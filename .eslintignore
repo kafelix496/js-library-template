@@ -1,5 +1,9 @@
 node_modules
 
-npm
-
 build
+
+es
+cjs
+dist
+
+scripts

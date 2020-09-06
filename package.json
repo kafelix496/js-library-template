@@ -3,7 +3,19 @@
   "version": "1.0.0",
   "private": true,
   "description": "Javascript library template",
-  "main": "index.js",
+  "main": "./cjs/index.js",
+  "exports": {
+    ".": {
+      "require": "./cjs/index.js",
+      "import": "./es/index.js",
+      "default": "./cjs/index.js"
+    },
+    "./es/": "./es/",
+    "./cjs/": "./cjs/",
+    "./dist/": "./dist/"
+  },
+  "module": "./es/index.js",
+  "unpkg": "dist/customLibrary.min.js",
   "devDependencies": {
     "@babel/core": "^7.11.5",
     "@babel/preset-env": "^7.11.5",
@@ -21,7 +33,6 @@
     "lint-staged": "^10.2.13",
     "rimraf": "^3.0.2",
     "rollup": "^2.26.9",
-    "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-terser": "^7.0.1"
   },
   "scripts": {
@@ -29,11 +40,13 @@
     "lint": "eslint '**/*.js'",
     "lint:fix": "eslint --fix '**/*.js'",
     "prebuild": "rimraf es cjs dist",
-    "build:es": "rollup --config --format='es' --file='es/'",
-    "build:cjs": "rollup --config --format='cjs' --file='cjs/'",
-    "build:umd": "rollup --config --format='umd' --file='dist/customLibrary.js' --name='customLibrary'",
-    "build:umd:min": "rollup --config --format='umd' --file='dist/customLibrary.min.js' --name='customLibrary'",
-    "build": "npm run build:es && npm run build:cjs && npm run build:umd && npm run build:umd:min"
+    "build:es": "rollup --config --format='es' --file='es/customLibrary.js' --environment 'BUILD:development'",
+    "build:es:min": "rollup --config --format='es' --file='es/customLibrary.min.js' --environment 'BUILD:production'",
+    "build:cjs": "rollup --config --format='cjs' --file='cjs/customLibrary.js' --environment 'BUILD:development'",
+    "build:cjs:min": "rollup --config --format='cjs' --file='cjs/customLibrary.min.js' --environment 'BUILD:production'",
+    "build:umd": "rollup --config --format='umd' --file='dist/customLibrary.js' --environment 'BUILD:development' --name='customLibrary'",
+    "build:umd:min": "rollup --config --format='umd' --file='dist/customLibrary.min.js' --environment 'BUILD:production' --name='customLibrary'",
+    "build": "npm run build:es && npm run build:es:min && npm run build:cjs && npm run build:cjs:min && node ./scripts/copyIndexFile.js && npm run build:umd && npm run build:umd:min"
   },
   "husky": {
     "hooks": {
@@ -48,7 +61,7 @@
     "url": "git+https://github.com/kafelix496/js-library-template.git"
   },
   "keywords": [
-    "react",
+    "javascript",
     "library",
     "template"
   ],
@@ -58,5 +71,9 @@
     "url": "https://github.com/kafelix496/js-library-template/issues"
   },
   "homepage": "https://github.com/kafelix496/js-library-template#readme",
-  "dependencies": {}
+  "files": [
+    "es",
+    "cjs",
+    "dist"
+  ]
 }
