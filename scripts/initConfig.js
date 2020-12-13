@@ -1,7 +1,7 @@
 const path = require('path')
 const fs = require('fs')
 const { prompt } = require('enquirer')
-const { exec } = require('child_process')
+const { execSync } = require('child_process')
 
 const originalFolderName = 'customLibraryTemplate'
 const originalFolderNameRegExp = new RegExp(originalFolderName, 'g')
@@ -62,23 +62,42 @@ prompt([{
     packageJson.unpkg = packageJson.unpkg.replace(originalFolderNameRegExp, answer.folderName)
     fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2))
 
+    const esAppjs = fs.readFileSync('examples/es/src/App.js', 'utf8')
+    fs.writeFileSync(
+      'examples/es/src/App.js',
+      esAppjs
+        .replace(new RegExp(originalPackageName, 'g'), packageJson.name)
+        .replace(originalFolderNameRegExp, answer.folderName)
+        .replace(/CUSTOM_UMD_GLOBAL_VARIABLE/g, answer.umdName)
+    )
+    const cjsIndexjs = fs.readFileSync('examples/cjs/index.js', 'utf8')
+    fs.writeFileSync(
+      'examples/cjs/index.js',
+      cjsIndexjs
+        .replace(new RegExp(originalPackageName, 'g'), packageJson.name)
+        .replace(originalFolderNameRegExp, answer.folderName)
+        .replace(/CUSTOM_UMD_GLOBAL_VARIABLE/g, answer.umdName)
+    )
     const umdIndexHtml = fs.readFileSync('examples/umd/index.html', 'utf8')
     fs.writeFileSync(
       'examples/umd/index.html',
       umdIndexHtml
         .replace(new RegExp(originalPackageName, 'g'), packageJson.name)
         .replace(originalFolderNameRegExp, answer.folderName)
+        .replace(/CUSTOM_UMD_GLOBAL_VARIABLE/g, answer.umdName)
     )
 
-    console.log('===== Please wait a little bit... installing npm packages (0 / 4) =====')
-    exec('npm install')
-    console.log('===== Please wait a little bit... installing npm packages (1 / 4) =====')
-    exec(`cd examples/es && npm remove ${originalPackageName} && npm install ../../`)
-    console.log('===== Please wait a little bit... installing npm packages (2 / 4) =====')
-    exec(`cd examples/cjs && npm remove ${originalPackageName} && npm install ../../`)
-    console.log('===== Please wait a little bit... installing npm packages (3 / 4) =====')
-    exec(`cd examples/umd && npm remove ${originalPackageName} && npm install ../../`)
-    console.log('===== Finish install npm packages (4 / 4) =====')
+    console.log('===== Please wait a little bit... Installing npm packages (1 / 4) =====')
+    execSync('npm install')
+    console.log('===== Please wait a little bit... Installing npm packages (2 / 4) =====')
+    execSync(`cd examples/es && npm remove ${originalPackageName} && npm install ../../`)
+    console.log('===== Please wait a little bit... Installing npm packages (3 / 4) =====')
+    execSync(`cd examples/cjs && npm remove ${originalPackageName} && npm install ../../`)
+    console.log('===== Please wait a little bit... Installing npm packages (4 / 4) =====')
+    execSync(`cd examples/umd && npm remove ${originalPackageName} && npm install ../../`)
+
+    console.log('===== Please wait a little bit... Building packages =====')
+    execSync('npm run build')
   } catch (err) {
     console.error(err)
   }
