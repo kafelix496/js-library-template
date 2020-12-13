@@ -3,7 +3,7 @@ const fs = require('fs')
 const { prompt } = require('enquirer')
 const { exec } = require('child_process')
 
-const originalFolderName = 'customLibrary'
+const originalFolderName = 'customLibraryTemplate'
 const originalFolderNameRegExp = new RegExp(originalFolderName, 'g')
 
 console.log('===== Package information... If you want to skip question, please press enter =====')
@@ -49,7 +49,7 @@ prompt([{
       'rollup.config.js',
       rollupConfigFile
         .replace(originalFolderNameRegExp, answer.folderName)
-        .replace(/CL/g, answer.umdName)
+        .replace(/CUSTOM_UMD_GLOBAL_VARIABLE/g, answer.umdName)
     )
 
     const packageJsonString = fs.readFileSync('package.json', 'utf8')
@@ -61,6 +61,14 @@ prompt([{
     packageJson.keywords = answer.keywords
     packageJson.unpkg = packageJson.unpkg.replace(originalFolderNameRegExp, answer.folderName)
     fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2))
+
+    const umdIndexHtml = fs.readFileSync('examples/umd/index.html', 'utf8')
+    fs.writeFileSync(
+      'examples/umd/index.html',
+      umdIndexHtml
+        .replace(new RegExp(originalPackageName, 'g'), packageJson.name)
+        .replace(originalFolderNameRegExp, answer.folderName)
+    )
 
     console.log('===== Please wait a little bit... installing npm packages (0 / 4) =====')
     exec('npm install')

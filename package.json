@@ -14,7 +14,7 @@
     "./dist/": "./dist/"
   },
   "module": "./es/index.js",
-  "unpkg": "dist/customLibrary.min.js",
+  "unpkg": "dist/customLibraryTemplate.min.js",
   "sideEffects": false,
   "devDependencies": {
     "@babel/core": "^7.11.5",

@@ -76,7 +76,7 @@ const results = (fileName, umdName, external) => [{
   }
 }]
 
-export default results('customLibrary', 'CL', []).map((object) => ({
+export default results('customLibraryTemplate', 'CUSTOM_UMD_GLOBAL_VARIABLE', []).map((object) => ({
   ...common(/.+min\.js$/.test(object.output.file)),
   ...object
 }))
