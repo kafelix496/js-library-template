@@ -69,5 +69,8 @@
     "es",
     "cjs",
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "enquirer": "^2.3.6"
+  }
 }
