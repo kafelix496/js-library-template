@@ -25,8 +25,8 @@ prompt([{
   message: 'Input package keywords ( Type comma-separated keywords ) : '
 }, {
   type: 'input',
-  name: 'folderName',
-  message: 'Input publish file name : '
+  name: 'bundleName',
+  message: 'Input bundle name ( Default is \'customLibraryTemplate\' ) : '
 }, {
   type: 'input',
   name: 'umdName',
@@ -35,20 +35,20 @@ prompt([{
   // console.log('answer', answer)
 
   try {
-    fs.renameSync(`src/${originalFolderName}`, `src/${answer.folderName}`)
+    fs.renameSync(`src/${originalFolderName}`, `src/${answer.bundleName}`)
 
     const publishIndexFileTemplate = fs.readFileSync('scripts/publishIndexFileTemplate.js', 'utf8')
     fs.writeFileSync(
       'scripts/publishIndexFileTemplate.js',
       publishIndexFileTemplate
-        .replace(originalFolderNameRegExp, answer.folderName)
+        .replace(originalFolderNameRegExp, answer.bundleName)
     )
 
     const rollupConfigFile = fs.readFileSync('rollup.config.js', 'utf8')
     fs.writeFileSync(
       'rollup.config.js',
       rollupConfigFile
-        .replace(originalFolderNameRegExp, answer.folderName)
+        .replace(originalFolderNameRegExp, answer.bundleName)
         .replace(/CUSTOM_UMD_GLOBAL_VARIABLE/g, answer.umdName)
     )
 
@@ -58,7 +58,7 @@ prompt([{
     packageJson.description = answer.description
     packageJson.author = answer.author
     packageJson.keywords = answer.keywords
-    packageJson.unpkg = packageJson.unpkg.replace(originalFolderNameRegExp, answer.folderName)
+    packageJson.unpkg = packageJson.unpkg.replace(originalFolderNameRegExp, answer.bundleName)
     fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2))
 
     console.log('===== Please wait a little bit... Installing npm packages =====')
