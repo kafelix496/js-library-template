@@ -32,7 +32,7 @@ const common = (isProd) => ({
 
 const results = (fileName, umdName, external) => [{
   input: `src/${fileName}/index.js`,
-  external,
+  external: Object.keys(external),
   output: {
     file: `es/${fileName}.js`,
     format: 'es'
@@ -64,7 +64,8 @@ const results = (fileName, umdName, external) => [{
   output: {
     file: `dist/${fileName}.js`,
     format: 'umd',
-    name: umdName
+    name: umdName,
+    globals: external
   }
 }, {
   input: `src/${fileName}/index.js`,
@@ -72,11 +73,12 @@ const results = (fileName, umdName, external) => [{
   output: {
     file: `dist/${fileName}.min.js`,
     format: 'umd',
-    name: umdName
+    name: umdName,
+    globals: external
   }
 }]
 
-export default results('customLibraryTemplate', 'CUSTOM_UMD_GLOBAL_VARIABLE', []).map((object) => ({
+export default results('customLibraryTemplate', 'CUSTOM_UMD_GLOBAL_VARIABLE', {}).map((object) => ({
   ...common(/.+min\.js$/.test(object.output.file)),
   ...object
 }))
