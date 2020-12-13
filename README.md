@@ -2,19 +2,8 @@
 Javascript library template
 
 ## Need to change variables
-> recommend: when you change variables, search name and change everything
-
-```
-PUBLISH_FILE_NAME : name you want to put when publish
-PUBLISH_NAME_FOR_UMD_FORMAT : Name for UMD export
-
-./src/customLibrary -> ./src/PUBLISH_FILE_NAME
-./package.json : 'name', 'description', 'author' 'keywords' property
-./package.json : 'unpkg' property -> 'customLibrary' -> PUBLISH_FILE_NAME
-./scripts/publishIndex : 'customLibrary' -> PUBLISH_FILE_NAME
-./rollup.config.js : 'customLibrary' -> PUBLISH_FILE_NAME
-./rollup.config.js : 'CL' -> Name for UMD export
-```
+> Recommend to use initialize scripts
+``` node scripts/initConfig.js ```
 
 ## Lint
 ```
@@ -27,7 +16,6 @@ npm run test
 ```
 
 ## Build
-
 ```
 npm run build
 ```
