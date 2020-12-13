@@ -1,7 +1,7 @@
 # js-library-template
 Javascript library template
 
-## Need to change variables
+## Need to change custom config names and stuff
 > Recommend to use initialize scripts
 ``` node scripts/initConfig.js ```
 
